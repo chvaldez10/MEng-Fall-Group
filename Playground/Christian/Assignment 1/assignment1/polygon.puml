@@ -1,0 +1,12 @@
+@startuml
+class Polygon {
+- LinkedHashSet<Line> polygon
+- int objID
+- {static} int classID
+~ Iterator<Line> it
++ <<Create>> Polygon(LinkedHashSet<Line>)
++ Iterator<Line> getLine()
++ {static} int classID()
++ String toString()
+}
+@enduml

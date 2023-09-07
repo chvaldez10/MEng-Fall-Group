@@ -1,0 +1,10 @@
+@startuml
+class Line {
+~ Point start
+- {static} int classID
+- int objID
++ <<Create>> Line(Point,Point)
++ double distance()
++ String toString()
+}
+@enduml
