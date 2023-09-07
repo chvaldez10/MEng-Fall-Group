@@ -1,8 +1,0 @@
-@startuml
-class Point {
-- int x
-+ <<Create>> Point(int,int)
-+ {static} double distance(Point,Point)
-+ String toString()
-}
-@enduml

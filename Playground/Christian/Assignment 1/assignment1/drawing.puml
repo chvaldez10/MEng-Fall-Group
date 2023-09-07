@@ -5,4 +5,28 @@ class Drawing {
 - double perimeter(Polygon)
 + {static} void main(String[])
 }
+class Point {
+- int x
++ <<Create>> Point(int,int)
++ {static} double distance(Point,Point)
++ String toString()
+}
+class Line {
+~ Point start
+- {static} int classID
+- int objID
++ <<Create>> Line(Point,Point)
++ double distance()
++ String toString()
+}
+class Polygon {
+- LinkedHashSet<Line> polygon
+- int objID
+- {static} int classID
+~ Iterator<Line> it
++ <<Create>> Polygon(LinkedHashSet<Line>)
++ Iterator<Line> getLine()
++ {static} int classID()
++ String toString()
+}
 @enduml

@@ -34,10 +34,17 @@ class Polygon {
             //   Line 2: starts at (50, 100), and ends at (100, 30)
             //   Line 3: starts at (100, 30), and ends at (20, 30)
             //
-        String s = "\nOops... Polygon's toString method doesn't know how to use "
-    			+ "the Line's toString method.\n        And Line's toString"
-    			+ " method doesn't know how to use Point's toString method "
-    			+ "to\n        display its lines' start and end point coordinates. ";
+//        String s = "\nOops... Polygon's toString method doesn't know how to use "
+//    			+ "the Line's toString method.\n        And Line's toString"
+//    			+ " method doesn't know how to use Point's toString method "
+//    			+ "to\n        display its lines' start and end point coordinates. ";
+
+		String s = "";
+
+		for (Line l : polygon) {
+			System.out.println(this.objID);
+			System.out.println("Line " + 1 + ": starts at " + l.start + " and ends at " + l.end + ".");
+		}
 
     	return s;	
     }
