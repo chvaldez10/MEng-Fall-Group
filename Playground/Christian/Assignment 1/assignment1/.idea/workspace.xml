@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="09c49f5f-c23d-4939-91dc-bcd54c6e739b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawing.puml" beforeDir="false" afterPath="$PROJECT_DIR$/drawing.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/line.puml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/point.puml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygon.puml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Line.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polygon.java" afterDir="false" />
@@ -48,16 +44,5 @@
       <updated>1694018263609</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Drawing.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

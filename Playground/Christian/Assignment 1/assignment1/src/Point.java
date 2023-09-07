@@ -14,11 +14,6 @@ class Point {
 	}
 	
 	public String toString(){
-        // THIS METHOD DOESN'T WORK. AS PART OF EXERCISE-2 STUDENTS MUST FIX IT
-        // TO RETURN A STRING WITH THE COORDINATES OF A POINT IN THE FORMAT SHOWN
-        // IN THE EXAMPLE BELOW:
-        // (20, 30)
-//        String s = "Oops... Point's toString doesn't know how to display point coordinates.";
 		String s = "(" + this.x + ", " + this.y + ")";
 		return  s;
 	}
