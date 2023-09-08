@@ -33,4 +33,6 @@
     Drawing --> Line
     Drawing --> Polygon
     Drawing --> Point
+    Line *-- Point
+    Polygon *-- Line
 @enduml
