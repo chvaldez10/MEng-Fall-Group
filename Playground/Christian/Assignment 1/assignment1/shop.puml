@@ -1,0 +1,8 @@
+@startuml
+    class Drawing {
+        ~ LinkedHashSet<Line> lines
+        + void drawPolygon(LinkedHashSet<Line>)
+        - double perimeter(Polygon)
+        + {static} void main(String[])
+    }
+@enduml
