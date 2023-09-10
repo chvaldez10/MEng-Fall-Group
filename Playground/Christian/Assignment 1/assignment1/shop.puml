@@ -1,5 +1,71 @@
 @startuml
     class Inventory {
-
+        - tools: List<Tools>
+        - suppliers: List<Supplier>
+        + addTool(tool: Tool): void
+        + deleteTool(toolId: int): void
+        + searchByName(name: String): list
+        + searchById(toolId: int): Tool
+        + checkStock(): void
+        + updateStock(): void
+        + loadToolsFromFile(): void
+        + loadSuppliersFromFile(): void
+        - exportOrder(orderData: HashMap): void
     }
+
+    class Tool {
+        - toolId: int
+        - name: String
+        - stock: int
+        - price: double
+        - supplierId: int
+
+        + <<Create>> Tool(toolId: int, name: String, stock: int, price: double, supplierId: int)
+        + toString(): String
+    }
+
+    class Supplier {
+        - supplierId: int
+        - company: String
+        - address: String
+        - contact: String
+
+        + <<Create>> Supplier(supplierId: int, company: String, address: String, contact: String)
+        + toString(): String
+    }
+
+    class Order {
+        - tool: Tool
+        - supplier: Supplier
+        - requiredQuantity: int
+
+        + <<Create>> Order(tool: Tool, supplier: Supplier, requiredQty: int)
+        + toString(): String
+    }
+
+    class OrderLine {
+        - orderId: int
+        - dateOrdered: Date
+        - orderLines: List<OrderLine>
+
+        + OrderLine(): void
+        + addOrderLine(orderLine: OrderLine): void
+        + generateOrderId(): int
+        + writeToFile(): void
+    }
+
+    class FileHandler {
+        + readToolsFromFile(): List<Tool>
+        + readSuppliersFromFile(): List<Supplier>
+        + writeOrderToFile(order: Order): void
+    }
+
+    Inventory --> FileHandler
+    Inventory o-- Tool
+    Inventory o-- Supplier
+
+    Inventory o-- Order
+    Order *-- OrderLine
+
+    OrderLine --> Tool
 @enduml
