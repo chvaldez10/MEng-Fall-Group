@@ -1,33 +1,34 @@
 @startuml
     class Drawing {
-        ~ LinkedHashSet<Line> lines
-        + void drawPolygon(LinkedHashSet<Line>)
-        - double perimeter(Polygon)
-        + {static} void main(String[])
+        ~ lines: LinkedHashSet<Line>
+        + drawPolygon(LinkedHashSet<Line>): void
+        - perimeter(Polygon): double
+        + {static} main(String[]): void
     }
     class Point {
-        - int x
+        - x: int
+        - y: int
         + <<Create>> Point(int,int)
-        + {static} double distance(Point,Point)
-        + String toString()
+        + {static} distance(Point,Point): double
+        + toString(): String
     }
     class Line {
-        ~ Point start
-        - {static} int classID
-        - int objID
+        ~ start: Point
+        - {static} classID: int
+        - objID: int
         + <<Create>> Line(Point,Point)
-        + double distance()
-        + String toString()
+        + distance(): double
+        + toString(): String
     }
     class Polygon {
-        - LinkedHashSet<Line> polygon
-        - int objID
-        - {static} int classID
-        ~ Iterator<Line> it
+        - polygon: LinkedHashSet<Line>
+        - objID: int
+        - {static} classID: int
+        ~ it: Iterator<Line>
         + <<Create>> Polygon(LinkedHashSet<Line>)
-        + Iterator<Line> getLine()
-        + {static} int classID()
-        + String toString()
+        + getLine(): Iterator<Line>
+        + {static} classID(): int
+        + toString(): String
     }
 
     Drawing --> Line
