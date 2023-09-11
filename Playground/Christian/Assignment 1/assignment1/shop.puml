@@ -1,71 +1,97 @@
 @startuml
-    class Inventory {
-        - tools: List<Tools>
+    class InventoryManager {
+        /' class attributes '/
+        - tools: List<Tool>
         - suppliers: List<Supplier>
-        + addTool(tool: Tool): void
-        + deleteTool(toolId: int): void
-        + searchByName(name: String): list
-        + searchById(toolId: int): Tool
-        + checkStock(): void
-        + updateStock(): void
-        + loadToolsFromFile(): void
-        + loadSuppliersFromFile(): void
+        - orders" List<Order>
+
+        /' create|add tools '/
+        - addTools(tool: Tool): void
+
+        /' delete tools '/
+        - deleteTool(toolId: int): void
+
+        /' read tools '/
+        - searchByName(name: String): list
+        - searchById(toolId: int): Tool
+        - checkStock(): void
+
+        /' update tools '/
+        - makeOrder(): void
+
+        /' file handler '/
+        - loadToolsFromFile(): void
+        - loadSuppliersFromFile(): void
         - exportOrder(orderData: HashMap): void
     }
 
     class Tool {
+        /' class attributes '/
         - toolId: int
         - name: String
         - stock: int
         - price: double
         - supplierId: int
 
-        + <<Create>> Tool(toolId: int, name: String, stock: int, price: double, supplierId: int)
-        + toString(): String
+        /' get data '/
+        + getToolById(): Tool
+        + getToolByName(): Tool
+        + checkStock(): boolean
+
+        /' update data '/
+        + decreaseQuantity()
+        + increaseQuantity()
     }
 
     class Supplier {
+        /' class attributes '/
         - supplierId: int
         - company: String
         - address: String
         - contact: String
 
-        + <<Create>> Supplier(supplierId: int, company: String, address: String, contact: String)
-        + toString(): String
+        /' read data '/
+        getSupplierById(): Supplier
     }
 
     class Order {
+        /' class attributes '/
         - tool: Tool
         - supplier: Supplier
-        - requiredQuantity: int
+        - allOrders: List<OrderLine>
 
-        + <<Create>> Order(tool: Tool, supplier: Supplier, requiredQty: int)
-        + toString(): String
+        /' creates one order '/
+        + addOrderLine(orderLine: OrderLine)
     }
 
     class OrderLine {
-        - orderId: int
-        - dateOrdered: Date
-        - orderLines: List<OrderLine>
+        /' class attributes '/
+        - orderId: Tool
+        - quantity: int
 
-        + OrderLine(): void
-        + addOrderLine(orderLine: OrderLine): void
-        + generateOrderId(): int
-        + writeToFile(): void
+        /' check stock '/
+        + checkStock()
     }
 
     class FileHandler {
-        + readToolsFromFile(): List<Tool>
-        + readSuppliersFromFile(): List<Supplier>
-        + writeOrderToFile(order: Order): void
+        /' read files '/
+        + {static} readToolsFromFile(): List<Tool>
+        + {static} readSuppliersFromFile(): List<Supplier>
+        + {static} writeOrderToFile(order: Order): void
     }
 
-    Inventory --> FileHandler
-    Inventory o-- Tool
-    Inventory o-- Supplier
+    /' relationships for InventoryManager '/
+    InventoryManager --> FileHandler
+    InventoryManager o-- Tool
+    InventoryManager o-- Supplier
+    InventoryManager o-- Order
 
-    Inventory o-- Order
+    /' relationships for Tool and Supplier '/
+    Tool -->  Supplier
+
+    /' relationships for Order '/
     Order *-- OrderLine
 
+    /' relationships for OrderLine '/
     OrderLine --> Tool
 @enduml
