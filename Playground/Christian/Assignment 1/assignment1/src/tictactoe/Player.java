@@ -12,6 +12,10 @@ public class Player {
         this.mark = mark;
     }
 
+    public void setBoard(Board board){
+        this.board = board;
+    }
+
     public void play() {
 
     }
@@ -22,5 +26,4 @@ public class Player {
 
     }
 
-    public void setBoard(Board board){}
 }
