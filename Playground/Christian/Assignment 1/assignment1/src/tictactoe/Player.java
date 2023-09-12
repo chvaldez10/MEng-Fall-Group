@@ -24,8 +24,18 @@ public class Player {
 
 
     public void play() {
-        makeMove();
-        board.display();
+        if (!board.isFull() && !board.oWins() && !board.xWins()) makeMove();
+
+        if (board.xWins()) {
+            
+        } else if (board.oWins()){
+
+        } else if (board.isFull()){
+            System.out.println("Game Over! The board is full!");
+        } else {
+            board.display();
+            opponent.play();
+        }
     }
 
     public void makeMove() {
