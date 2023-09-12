@@ -61,6 +61,4 @@ public class Game implements Constants {
 		// starts the game
         theGame.appointReferee(theRef);
 	}
-
-
 }
