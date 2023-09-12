@@ -1,5 +1,7 @@
 package tictactoe;
 
+import java.util.Scanner;
+
 public class Player {
     private String name;
     private Board board;
@@ -16,14 +18,32 @@ public class Player {
         this.board = board;
     }
 
+    public void setOpponent(Player opponent) {
+        this.opponent = opponent;
+    }
+
+
     public void play() {
-
+        makeMove();
+        board.display();
     }
 
-    public void makeMove() {}
+    public void makeMove() {
+        Scanner sc = new Scanner(System.in);
 
-    public void setOpponent() {
+        // row mark
+        System.out.print(name + ", what row should your next "
+                + mark + " be placed in? ");
+        int tmpMarkRow = sc.nextInt();
+
+        // column mark
+        System.out.println();
+        System.out.print(name + ", what column should your next "
+                + mark + " be placed in? ");
+        int tmpMarkColumn = sc.nextInt();
+        System.out.println();
+
+        board.addMark(tmpMarkRow, tmpMarkColumn, mark);
 
     }
-
 }

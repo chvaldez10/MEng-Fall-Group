@@ -17,5 +17,12 @@ public class Referee {
         this.xPlayer = xPlayer;
     }
 
-    public void runTheGame() {}
+    public void runTheGame() {
+        // set the opponent
+        xPlayer.setOpponent(oPlayer);
+        oPlayer.setOpponent(xPlayer);
+
+        board.display(); // show empty board
+        xPlayer.play(); // start the game
+    }
 }
