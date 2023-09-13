@@ -5,7 +5,7 @@ This repo is for our group to share code for all fall term assignments/projects.
 **Group Members:**
 
 - Redge Santillan (30211001)
-- Chioma Ukaegbu ()
+- Chioma Ukaegbu (30206698)
 - Christian Valdez (30065766)
 
 ## Outstanding Tasks
