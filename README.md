@@ -1,6 +1,6 @@
 # Meng Fall Group
 
-This repo is for our group to share code for all fall term assignments/projects.
+This repo is for our group to share code during the fall term.
 
 **Group Members:**
 
@@ -10,7 +10,10 @@ This repo is for our group to share code for all fall term assignments/projects.
 
 ## Outstanding Tasks
 
-- None
+- ENSF 607 Assignment 2 📥
+  - Exercise 1
+  - Exercise 2
+  - Exercise 3
 
 ## Deadlines 📅:
 
@@ -30,6 +33,10 @@ This repo is for our group to share code for all fall term assignments/projects.
 - 📁 **MEng-Fall-Group** (Root folder)
   - 📁 **ENSF 607**
     - 📁 **Assignment 2**
+      - 📁 **src**
+        - **tictactoe**
+      - 📷 **media**
+      - 📝 **documents**
     - 📁 **Assignment 3**
     - 📁 **Group Project**
     - 📁 **Playground**
@@ -39,8 +46,6 @@ This repo is for our group to share code for all fall term assignments/projects.
       - 📁 **Redge**
       - 📄 README.md
   - 📁 **ENSF 608**
-    - 📄 del_me.txt
   - 📁 **ENSF 612**
-    - 📄 del_me.txt
   - 📄 .gitignore
   - 📄 README.md
