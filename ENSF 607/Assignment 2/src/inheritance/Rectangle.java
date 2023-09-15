@@ -1,4 +1,4 @@
-
+package inheritance;
 
 public class Rectangle extends Shape {
 	protected Double width, length;

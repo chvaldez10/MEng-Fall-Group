@@ -1,3 +1,4 @@
+package inheritance;
 
 class Colour
 {

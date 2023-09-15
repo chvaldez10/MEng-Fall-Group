@@ -1,4 +1,4 @@
-
+package inheritance;
 
 class Prism extends Rectangle {
 	private Double height;

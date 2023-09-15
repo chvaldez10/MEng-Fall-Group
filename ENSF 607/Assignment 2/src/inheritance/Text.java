@@ -1,3 +1,4 @@
+package inheritance;
 
 public class Text {
     private String text;

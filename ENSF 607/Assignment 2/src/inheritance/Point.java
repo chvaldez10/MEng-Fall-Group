@@ -1,3 +1,4 @@
+package inheritance;
 
 class Point{
 	private Colour colour;

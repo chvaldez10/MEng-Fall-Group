@@ -1,4 +1,4 @@
-
+package inheritance;
 
 class Circle extends Shape{
 	private Double radius;

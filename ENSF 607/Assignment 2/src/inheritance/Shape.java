@@ -1,3 +1,4 @@
+package inheritance;
 
 abstract class Shape {
 	protected Point origin;
