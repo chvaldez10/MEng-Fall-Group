@@ -1,12 +1,20 @@
 package tictactoe;
 
-//STUDENTS SHOULD ADD CLASS COMMENTS, METHOD COMMENTS, FIELD COMMENTS
-
-
+/**
+ * The Board class represents the Tic Tac Toe game board.
+ * It provides functionality to set marks, check for winners, display the board, and manage game state.
+ */
 public class Board implements Constants {
+	/** Represents the game board as a 2D char array. */
 	private char theBoard[][];
+
+	/** Represents the count of marks on the board. */
 	private int markCount;
 
+	/**
+	 * Constructor for the Board class.
+	 * Initializes the board and sets all spots to SPACE_CHAR.
+	 */
 	public Board() {
 		markCount = 0;
 		theBoard = new char[3][];
@@ -17,14 +25,31 @@ public class Board implements Constants {
 		}
 	}
 
+	/**
+	 * Fetches the mark at a given row and column.
+	 *
+	 * @param row The row index.
+	 * @param col The column index.
+	 * @return The mark at the given row and column.
+	 */
 	public char getMark(int row, int col) {
 		return theBoard[row][col];
 	}
 
+	/**
+	 * Checks if the board is full.
+	 *
+	 * @return true if the board is full, otherwise false.
+	 */
 	public boolean isFull() {
 		return markCount == 9;
 	}
 
+	/**
+	 * Checks if player 'X' wins.
+	 *
+	 * @return true if 'X' wins, otherwise false.
+	 */
 	public boolean xWins() {
 		if (checkWinner(LETTER_X) == 1)
 			return true;
@@ -32,6 +57,11 @@ public class Board implements Constants {
 			return false;
 	}
 
+	/**
+	 * Checks if player 'O' wins.
+	 *
+	 * @return true if 'O' wins, otherwise false.
+	 */
 	public boolean oWins() {
 		if (checkWinner(LETTER_O) == 1)
 			return true;
@@ -39,6 +69,9 @@ public class Board implements Constants {
 			return false;
 	}
 
+	/**
+	 * Displays the game board in a formatted manner.
+	 */
 	public void display() {
 		displayColumnHeaders();
 		addHyphens();
@@ -53,12 +86,22 @@ public class Board implements Constants {
 		}
 	}
 
+	/**
+	 * Adds a mark on the board at a given row and column.
+	 *
+	 * @param row The row index.
+	 * @param col The column index.
+	 * @param mark The mark to be placed (either 'X' or 'O').
+	 */
 	public void addMark(int row, int col, char mark) {
 
 		theBoard[row][col] = mark;
 		markCount++;
 	}
 
+	/**
+	 * Clears the board for a new game.
+	 */
 	public void clear() {
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 3; j++)
@@ -66,6 +109,13 @@ public class Board implements Constants {
 		markCount = 0;
 	}
 
+
+	/**
+	 * Checks if a given mark is a winner.
+	 *
+	 * @param mark The mark to check (either 'X' or 'O').
+	 * @return 1 if the given mark wins, otherwise 0.
+	 */
 	int checkWinner(char mark) {
 		int row, col;
 		int result = 0;
@@ -108,6 +158,9 @@ public class Board implements Constants {
 		return result;
 	}
 
+	/**
+	 * Displays the column headers for the board.
+	 */
 	void displayColumnHeaders() {
 		System.out.print("          ");
 		for (int j = 0; j < 3; j++)
@@ -115,6 +168,9 @@ public class Board implements Constants {
 		System.out.println();
 	}
 
+	/**
+	 * Adds hyphens for board display.
+	 */
 	void addHyphens() {
 		System.out.print("          ");
 		for (int j = 0; j < 3; j++)
@@ -122,6 +178,9 @@ public class Board implements Constants {
 		System.out.println("+");
 	}
 
+	/**
+	 * Adds spaces for board display.
+	 */
 	void addSpaces() {
 		System.out.print("          ");
 		for (int j = 0; j < 3; j++)
