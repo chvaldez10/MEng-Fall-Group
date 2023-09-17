@@ -1,0 +1,39 @@
+@startuml
+abstract class Shape{
+	# origin : Point
+	# protected name : Text
+	
+	# {abstract} area() : Double
+	# {abstract} perimeter() : Double
+	# {abstract} volume() : Double 
+	
+	# getOrigin() : Point
+	# getName() : String
+	# distance(other : Shape) : Double
+	# distance(a: Shape, b : Shape) : Double
+	# move(dx : Double, dy : Double) : void
+}
+
+class Text{
+	- text : String
+	
+	+ setText(newText : String) : void
+	+ getText() : String
+}
+
+class Point{
+	- colour : Colour
+	- xCoordinate: Double
+	- yCoordinate: Double
+	
+	+ distance(other : Point) : Double
+	+ {static} distance(that : Point, other : Point) : Double
+}
+
+class Colour{
+}
+
+Text --* Shape : has-a
+Point --* Shape : has-a
+Point *-- Colour : has-a
+@enduml
