@@ -6,7 +6,31 @@ import java.util.TreeSet;
 public class Geometry{
 	private TreeSet <Shape> shapes;
 	
-	
+    public Geometry() {
+        shapes = new TreeSet<>();
+    }
+
+    public void add(Shape shape) {
+        shapes.add(shape);
+    }
+
+    public void showAll() {
+        Iterator<Shape> it = shapes.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+    }
+
+    public void calculator(Shape shape) {
+    	
+        String area = String.format("%.2f", shape.area());
+        String perimeter = String.format("%.2f", shape.perimeter());
+        String volume = String.format("%.2f", shape.volume());
+        
+        System.out.println("The area, perimeter, and volume of " + shape.getName() + " are: " +
+                area + ", " + perimeter + ", " + volume + ".");
+    }
+    
 	public static void main(String[] args) {
 		Rectangle r1 = new Rectangle(3.0, 4.0, 5.0, 6.0, "R1", new Colour("Black"));
         Circle c1 = new Circle (13.0, 14.0, 15.0, "C1",new Colour ("Green"));
@@ -26,7 +50,7 @@ public class Geometry{
         
         //      SECTION 2: THE FOLLOWING CODE SEGMENT MUST BE UNCOMMENTED ONLY
         //      FOR EXERCISE 2
-        /*
+        
          Geometry demo = new Geometry();
          System.out.println("\nAdding Rectangle, Circle, and Prism objects to the list... ");
          demo.add(r1);
@@ -49,7 +73,7 @@ public class Geometry{
             demo.calculator(it.next());
          }
          
-         */
+         
 
 	}
 }

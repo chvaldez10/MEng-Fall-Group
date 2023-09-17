@@ -5,7 +5,8 @@ class Colour
     private String colour;
     
 	public Colour(String s) {
-		colour = new String(s);
+//		colour = new string(s);
+		colour = s;
 	}
 
 

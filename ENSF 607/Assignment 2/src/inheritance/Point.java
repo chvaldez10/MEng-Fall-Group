@@ -1,5 +1,6 @@
 package inheritance;
 
+
 class Point{
 	private Colour colour;
 	private Double xCoordinate, yCoordinate;

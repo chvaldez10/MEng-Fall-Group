@@ -1,6 +1,7 @@
 package inheritance;
 
-abstract class Shape {
+
+abstract class Shape implements Comparable<Shape> {
 	protected Point origin;
 	protected Text name;
 	abstract protected Double area();
@@ -42,6 +43,14 @@ abstract class Shape {
 		String s = "\nShape name: " + name + "\nOrigin: " + origin;
 		return s;
 	}
+	
+    @Override
+    public int compareTo(Shape other) {
+        // Compare shapes based on their names
+        return this.getName().compareTo(other.getName());
+    }
 
 }
+
+
 
