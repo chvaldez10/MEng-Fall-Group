@@ -1,7 +1,7 @@
 @startuml
 abstract class Shape{
 	# origin : Point
-	# protected name : Text
+	# name : Text
 	
 	# {abstract} area() : Double
 	# {abstract} perimeter() : Double
@@ -31,9 +31,44 @@ class Point{
 }
 
 class Colour{
+	- colour : String
+}
+
+class Circle{
+	- radius : Double
+	
+	+ area() : Double
+	+ perimeter() : Double
+	+ volume() : Double
+}
+
+class Rectangle{
+	# width : Double
+	# length : Double
+	
+	# area() : Double
+	# perimeter() : Double
+	# volume() : Double
+}
+
+class Prism{
+	- height : Double
+	
+	+ height() : Double
+	+ area() : Double
+	+ perimeter() : Double
+	+ volume() : Double
+}
+
+class Geometry{
+	+ {static} main(args : String[]) : void
 }
 
 Text --* Shape : has-a
 Point --* Shape : has-a
 Point *-- Colour : has-a
+Shape <|-- Rectangle : is-a
+Shape <|-- Circle : is-a
+Rectangle <|-- Prism : is-a
+Shape <-- Geometry : uses
 @enduml
