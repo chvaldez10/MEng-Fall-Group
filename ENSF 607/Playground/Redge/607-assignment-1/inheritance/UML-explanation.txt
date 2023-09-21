@@ -1,0 +1,9 @@
+Text "1" --* "1" Shape : has-a
+Shape has a text-class
+
+Point "1..*" --* "1" Shape : has-a
+Point "1" *-- "1" Colour : has-a
+Shape <|-- Rectangle : is-a
+Shape <|-- Circle : is-a
+Rectangle <|-- Prism : is-a
+Shape "0..*" <-- "1" Geometry : uses
