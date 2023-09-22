@@ -16,9 +16,6 @@ abstract class Shape{
 
 class Text{
 	- text : String
-	
-	+ setText(newText : String) : void
-	+ getText() : String
 }
 
 class Point{
@@ -61,6 +58,7 @@ class Prism{
 }
 
 class Geometry{
+	- shapes : TreeSet<Shape>
 	+ {static} main(args : String[]) : void
 }
 
