@@ -33,11 +33,12 @@
         - price: double
         - supplierId: int
 
+        <<constructor>>
+        <<getters>>
+
         /' update stock '/
         + decreaseStock()
         + increaseStock()
-
-        <<getters>>
         + toString()
     }
 
@@ -48,6 +49,7 @@
         - address: String
         - contact: String
 
+        <<constructor>>
         <<getters>>
         + toString()
     }
@@ -58,8 +60,8 @@
         - suppliers: List<Supplier>
         - orders: List<Order>
 
-        /' constructor '/
-        + <<Create>> OrderLine(List<Tool>, List<Supplier>, List<Order>)
+        <<constructor>>
+        <<getters>>
 
         /' creates one order '/
         + runOrderLine()
@@ -75,9 +77,7 @@
         - date: String
         - items: List<Item>
 
-        /' check stock '/
-        + <<Create>> Order(int orderID, String date, List <Item>)
-
+        <<constructor>>
         <<getters>>
         + toString()
     }
@@ -88,6 +88,7 @@
         - quantity: int
         + <<Create>> Item(String name, String supplier, int quantity)
 
+        <<constructor>>
         <<getters>>
         + toString()
     }
