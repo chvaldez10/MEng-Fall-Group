@@ -24,7 +24,7 @@ public class Referee {
 
         board.display(); // show empty board
         
-        System.out.println("The Referee has started the game ...");
+        System.out.println("\nThe Referee has started the game ...\n");
         xPlayer.play(); // start the game
     }
 }

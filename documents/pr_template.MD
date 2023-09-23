@@ -6,11 +6,15 @@
 
 ### 📝 Description:
 
-<!-- include a description of changes. -->
+<!-- include a description of changes related to task. -->
 
 ---
 
-### 📓 Type of Change:
+### 🪄 Sidequest (s):
+
+## <!-- include a description of changes not related to task. -->
+
+### 📓 Type of Change (s):
 
 - [ ] 🐞 Bug fix (non-breaking change which fixes an issue)
 - [ ] 🌟 New feature (non-breaking change which adds functionality)
