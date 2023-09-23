@@ -123,6 +123,6 @@ abstract class Player implements Constants{
      * @return True if the index is valid (0, 1, or 2), false otherwise.
      */
     protected boolean isValidIndex(int index) {
-        return index >= 0 && index <= 2;
+        return index >= lowIndex && index <= highIndex;
     }
 }

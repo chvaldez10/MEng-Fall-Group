@@ -23,6 +23,8 @@ public class Referee {
         oPlayer.setOpponent(xPlayer);
 
         board.display(); // show empty board
+        
+        System.out.println("The Referee has started the game ...");
         xPlayer.play(); // start the game
     }
 }

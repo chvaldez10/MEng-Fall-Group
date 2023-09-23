@@ -10,16 +10,16 @@ public class HumanPlayer extends Player{
      * Allows the player to make a move on the board.
      */
     public void makeMove() {
-        int tmpMarkRow, tmpMarkColumn;
+        int row, col;
         boolean isEmpty;
 
         while (true) {
-            tmpMarkRow = getUserInput("row");
-            tmpMarkColumn = getUserInput("column");
-            isEmpty = super.isSpotEmpty(tmpMarkRow, tmpMarkColumn);
+            row = getUserInput("row");
+            col = getUserInput("column");
+            isEmpty = super.isSpotEmpty(row, col);
 
             if (isEmpty) {
-                board.addMark(tmpMarkRow, tmpMarkColumn, mark);
+                board.addMark(row, col, mark);
                 break; // exits the loop when a valid spot is marked
             } else {
                 System.out.println("Spot not available. Try again.");
