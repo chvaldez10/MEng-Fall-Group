@@ -3,7 +3,7 @@
         /' class attributes '/
         - tools: List<Tool>
         - suppliers: List<Supplier>
-        - orders: List<HashMap<Integer, >>
+        - orders: List<OrderLine>
 
         /' create|add tools '/
         - addTools(tool: Tool): void
@@ -33,11 +33,12 @@
         - price: double
         - supplierId: int
 
+        <<constructor>>
+        <<getters>>
+
         /' update stock '/
         + decreaseStock()
         + increaseStock()
-
-        <<getters>>
         + toString()
     }
 
@@ -48,6 +49,7 @@
         - address: String
         - contact: String
 
+        <<constructor>>
         <<getters>>
         + toString()
     }
@@ -58,8 +60,8 @@
         - suppliers: List<Supplier>
         - orders: List<Order>
 
-        /' constructor '/
-        + <<Create>> OrderLine(List<Tool>, List<Supplier>, List<Order>)
+        <<constructor>>
+        <<getters>>
 
         /' creates one order '/
         + runOrderLine()
@@ -75,9 +77,7 @@
         - date: String
         - items: List<Item>
 
-        /' check stock '/
-        + <<Create>> Order(int orderID, String date, List <Item>)
-
+        <<constructor>>
         <<getters>>
         + toString()
     }
@@ -88,6 +88,7 @@
         - quantity: int
         + <<Create>> Item(String name, String supplier, int quantity)
 
+        <<constructor>>
         <<getters>>
         + toString()
     }
@@ -101,14 +102,14 @@
 
     /' relationships for InventoryManager '/
     InventoryManager --> FileHandler
-    InventoryManager o-- Tool
-    InventoryManager o-- Supplier
-    InventoryManager o-- OrderLine
+    InventoryManager "1" o-- "many" Tool
+    InventoryManager "1" o-- "many" Supplier
+    InventoryManager "1" o-- "many" OrderLine
 
     /' relationships for Tool and Supplier '/
-    Tool "many" -- "1"  Supplier
+    Tool "many" --> "1"  Supplier
 
     /' relationships for Orderline, Order, Item '/
-    Order --* OrderLine
-    Item "many" -- "1" Order
+    Order "many" --o "1" OrderLine
+    Item "many" --* "1" Order
 @enduml

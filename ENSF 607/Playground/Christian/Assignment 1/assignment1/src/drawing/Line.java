@@ -1,4 +1,4 @@
-
+package drawing;
 class Line {
 
 	Point start, end;
