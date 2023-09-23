@@ -3,7 +3,7 @@
         /' class attributes '/
         - tools: List<Tool>
         - suppliers: List<Supplier>
-        - orders: List<HashMap<Integer, >>
+        - orders: List<OrderLine>
 
         /' create|add tools '/
         - addTools(tool: Tool): void
@@ -102,14 +102,14 @@
 
     /' relationships for InventoryManager '/
     InventoryManager --> FileHandler
-    InventoryManager o-- Tool
-    InventoryManager o-- Supplier
-    InventoryManager o-- OrderLine
+    InventoryManager "1" o-- "many" Tool
+    InventoryManager "1" o-- "many" Supplier
+    InventoryManager "1" o-- "many" OrderLine
 
     /' relationships for Tool and Supplier '/
-    Tool "many" -- "1"  Supplier
+    Tool "many" --> "1"  Supplier
 
     /' relationships for Orderline, Order, Item '/
-    Order --* OrderLine
-    Item "many" -- "1" Order
+    Order "many" --o "1" OrderLine
+    Item "many" --* "1" Order
 @enduml
