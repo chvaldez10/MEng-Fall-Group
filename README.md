@@ -1,6 +1,6 @@
 # Meng Fall Group
 
-This repo is for our group to share code during the fall term.
+This repo is for Team 🍚 to share code during the fall term.
 
 **Group Members:**
 
@@ -10,10 +10,7 @@ This repo is for our group to share code during the fall term.
 
 ## Outstanding Tasks
 
-- ENSF 607 Assignment 2 📥
-  - Exercise 1
-  - Exercise 2
-  - Exercise 3
+- ENSF 607 Assignment 2 report 📥
 
 ## Deadlines 📅:
 
@@ -34,6 +31,7 @@ This repo is for our group to share code during the fall term.
   - 📁 **ENSF 607**
     - 📁 **Assignment 2**
       - 📁 **src**
+        - **inheritance**
         - **tictactoe**
       - 📷 **media**
       - 📝 **documents**
