@@ -2,10 +2,6 @@ package tictactoe;
 
 import java.util.Scanner;
 
-/**
- * Represents a player in the Tic Tac Toe game.
- * Each player has a name and a mark ('X' or 'O').
- */
 abstract class Player implements Constants{
     /** The name of the player. */
     protected String name;
@@ -34,8 +30,7 @@ abstract class Player implements Constants{
     }
     
     /**
-     * Initiates the player's turn. If the game can continue, it prompts the player to make a move.
-     * After the move, it checks for a game conclusion and, if necessary, displays the result.
+     * Initiates a player's turn. If the game can continue, it prompts the player to make a move.
      */
     protected abstract void play();
     

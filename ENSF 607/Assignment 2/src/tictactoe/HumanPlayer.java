@@ -1,19 +1,12 @@
 package tictactoe;
 
 public class HumanPlayer extends Player{
-//    /** The name of the player. */
-//    private String name;
-//
-//    /** The game board. */
-//    private Board board;
-    
 	public HumanPlayer(String name, char mark) {
 		super(name, mark);
 	}
-	
 	@Override
 	/**
-     * Initiates the player's turn. If the game can continue, it prompts the player to make a move.
+     * If the game can continue, it prompts the player to make a move.
      * After the move, it checks for a game conclusion and, if necessary, displays the result.
      */
 	public void play() {
