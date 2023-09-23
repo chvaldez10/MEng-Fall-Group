@@ -30,9 +30,20 @@ abstract class Player implements Constants{
     }
     
     /**
-     * Initiates a player's turn. If the game can continue, it prompts the player to make a move.
+     * Initiates a player's turn. If the game can continue, it prompts a player to make a move.
      */
-    protected abstract void play();
+    protected void play() {
+		if (isGameContinuable()) {
+            makeMove();
+        }
+
+        if (isGameOver()) {
+            displayGameResult();
+        } else {
+            board.display();
+            opponent.play();
+        }
+    };
     
     /**
      * Allows the player to make a move on the board.
@@ -103,5 +114,15 @@ abstract class Player implements Constants{
      */
     protected boolean isSpotEmpty(int row, int col) {
     	return board.getMark(row, col) == SPACE_CHAR;
+    }
+    
+    /**
+     * Checks if the given index is valid for the Tic Tac Toe board.
+     *
+     * @param index The index to check.
+     * @return True if the index is valid (0, 1, or 2), false otherwise.
+     */
+    protected boolean isValidIndex(int index) {
+        return index >= 0 && index <= 2;
     }
 }

@@ -4,23 +4,6 @@ public class HumanPlayer extends Player{
 	public HumanPlayer(String name, char mark) {
 		super(name, mark);
 	}
-	@Override
-	/**
-     * If the game can continue, it prompts the player to make a move.
-     * After the move, it checks for a game conclusion and, if necessary, displays the result.
-     */
-	public void play() {
-		if (super.isGameContinuable()) {
-            makeMove();
-        }
-
-        if (super.isGameOver()) {
-            super.displayGameResult();
-        } else {
-            board.display();
-            opponent.play();
-        }
-	}
 	
 	@Override
 	/**
@@ -56,7 +39,7 @@ public class HumanPlayer extends Player{
             System.out.print(name + ", what " + label + " should your next " + mark + " be placed in? ");
             try {
                 index = Integer.parseInt(getKeyboardChar());
-                if (isValidIndex(index)) return index;
+                if (super.isValidIndex(index)) return index;
                 else throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
                 System.out.println("Not a valid " + label + ".");
@@ -76,13 +59,5 @@ public class HumanPlayer extends Player{
         }
         return "Not a valid input.";
     }
-    /**
-     * Checks if the given index is valid for the Tic Tac Toe board.
-     *
-     * @param index The index to check.
-     * @return True if the index is valid (0, 1, or 2), false otherwise.
-     */
-    public boolean isValidIndex(int index) {
-        return index >= 0 && index <= 2;
-    }
+
 }

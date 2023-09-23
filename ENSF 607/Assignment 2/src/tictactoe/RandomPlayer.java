@@ -5,9 +5,10 @@ public class RandomPlayer extends Player{
 		super(name, mark);
 	}
 	
-	@Override
-	public void play() {
-	}
+//	@Override
+//	public void play() {
+//		
+//	}
 	
 	@Override
 	public void makeMove() {}
