@@ -2,78 +2,58 @@ package tictactoe;
 
 import java.util.Scanner;
 
-public class Player {
-    private String name;
-    private Board board;
+abstract class Player implements Constants{
+    /** The name of the player. */
+    protected String name;
 
-    private Player opponent;
-    private char mark;
-    Scanner sc = new Scanner(System.in);
+    /** The game board. */
+    protected Board board;
 
+    /** The opponent player. */
+    protected Player opponent;
+
+    /** The mark ('X' or 'O') of the player. */
+    protected char mark;
+
+    /** Scanner for getting input from the player. */
+    protected Scanner sc = new Scanner(System.in);
+
+    /**
+     * Constructs a new player with a specified name and mark.
+     *
+     * @param name The name of the player.
+     * @param mark The mark ('X' or 'O') of the player.
+     */
     public Player(String name, char mark) {
         this.name = name;
         this.mark = mark;
-        this.sc = new Scanner(System.in);
     }
+    
+    /**
+     * Initiates a player's turn. If the game can continue, it prompts the player to make a move.
+     */
+    protected abstract void play();
+    
+    /**
+     * Allows the player to make a move on the board.
+     */
+    protected abstract void makeMove();
 
-    public void setBoard(Board board){
+    /**
+     * Sets the opponent player.
+     *
+     * @param opponent The opponent player.
+     */
+    protected void setOpponent(Player opponent) {
+    	this.opponent = opponent;
+    }
+    
+    /**
+     * Sets the game board for the player.
+     *
+     * @param board The Tic Tac Toe game board.
+     */
+    protected void setBoard(Board board) {
         this.board = board;
-    }
-
-    public void setOpponent(Player opponent) {
-        this.opponent = opponent;
-    }
-
-
-    public void play() {
-        // board has space and no winner
-        if (!board.isFull() && !board.oWins() && !board.xWins()) makeMove();
-
-        if (board.xWins()) {
-            System.out.println("X Wins!");
-        } else if (board.oWins()){
-            System.out.println("O Wins!");
-        } else if (board.isFull()){
-            System.out.println("Draw!");
-        } else {
-            board.display();
-            opponent.play();
-        }
-    }
-
-    public void makeMove() {
-        int tmpMarkRow = getUserInput("row");
-        int tmpMarkColumn = getUserInput("column");
-        board.addMark(tmpMarkRow, tmpMarkColumn, mark);
-    }
-
-    public int getUserInput(String label){
-        int index=-1;
-        System.out.print(name + ", what " + label +" should your next "
-                + mark + " be placed in? ");
-
-        try {
-            index = Integer.parseInt(getKeyboardChar());
-            System.out.println();
-            if (isValidIndex(index)) return index;
-            else throw new IllegalArgumentException();
-        } catch (IllegalArgumentException e) {
-            System.out.println("Not a valid " + label + ".");
-            index = getUserInput(label);
-        }
-        return index;
-    }
-
-    private String getKeyboardChar(){
-        if(sc.hasNext()) {
-            char c = sc.next().charAt(0);
-            return String.valueOf(c);
-        }
-        return "Not a valid input.";
-    }
-
-    public boolean isValidIndex(int index) {
-        if (index >=0 && index <=2) return true;
-        else return false;
     }
 }

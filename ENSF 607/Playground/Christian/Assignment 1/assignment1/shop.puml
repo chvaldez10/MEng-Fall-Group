@@ -3,7 +3,7 @@
         /' class attributes '/
         - tools: List<Tool>
         - suppliers: List<Supplier>
-        - orders" List<Order>
+        - orders: List<OrderLine>
 
         /' create|add tools '/
         - addTools(tool: Tool): void
@@ -33,14 +33,13 @@
         - price: double
         - supplierId: int
 
-        /' get data '/
-        + getToolById(): Tool
-        + getToolByName(): Tool
-        + checkStock(): boolean
+        <<constructor>>
+        <<getters>>
 
-        /' update data '/
-        + decreaseQuantity()
-        + increaseQuantity()
+        /' update stock '/
+        + decreaseStock()
+        + increaseStock()
+        + toString()
     }
 
     class Supplier {
@@ -50,27 +49,48 @@
         - address: String
         - contact: String
 
-        /' read data '/
-        getSupplierById(): Supplier
-    }
-
-    class Order {
-        /' class attributes '/
-        - tool: Tool
-        - supplier: Supplier
-        - allOrders: List<OrderLine>
-
-        /' creates one order '/
-        + addOrderLine(orderLine: OrderLine)
+        <<constructor>>
+        <<getters>>
+        + toString()
     }
 
     class OrderLine {
         /' class attributes '/
-        - orderId: Tool
-        - quantity: int
+        - tools: List<Tool>
+        - suppliers: List<Supplier>
+        - orders: List<Order>
 
-        /' check stock '/
-        + checkStock()
+        <<constructor>>
+        <<getters>>
+
+        /' creates one order '/
+        + runOrderLine()
+        - makeOrder()
+        - makeItem()
+        - searchTool()
+        - searchSupplier()
+    }
+
+    class Order {
+        /' class attributes '/
+        - orderId: int
+        - date: String
+        - items: List<Item>
+
+        <<constructor>>
+        <<getters>>
+        + toString()
+    }
+
+    class Item {
+        - name: String
+        - supplier: String
+        - quantity: int
+        + <<Create>> Item(String name, String supplier, int quantity)
+
+        <<constructor>>
+        <<getters>>
+        + toString()
     }
 
     class FileHandler {
@@ -82,16 +102,14 @@
 
     /' relationships for InventoryManager '/
     InventoryManager --> FileHandler
-    InventoryManager o-- Tool
-    InventoryManager o-- Supplier
-    InventoryManager o-- Order
+    InventoryManager "1" o-- "many" Tool
+    InventoryManager "1" o-- "many" Supplier
+    InventoryManager "1" o-- "many" OrderLine
 
     /' relationships for Tool and Supplier '/
-    Tool -->  Supplier
+    Tool "many" --> "1"  Supplier
 
-    /' relationships for Order '/
-    Order *-- OrderLine
-
-    /' relationships for OrderLine '/
-    OrderLine --> Tool
+    /' relationships for Orderline, Order, Item '/
+    Order "many" --o "1" OrderLine
+    Item "many" --* "1" Order
 @enduml

@@ -1,30 +1,63 @@
+package drawing;
 
 import java.util.*;
 
+/**
+ * Represents a polygon defined by a set of lines.
+ */
 class Polygon {
-	private final LinkedHashSet <Line> polygon;
-	private int objID;
-	private static int classID;
-	Iterator <Line> it;
 
+	/** The lines that make up the polygon. */
+	private final LinkedHashSet<Line> polygon;
+
+	/** Unique identifier for each instance of the Polygon class. */
+	private int objID;
+
+	/** Static counter to generate unique identifiers for Polygon instances. */
+	private static int classID;
+
+	/** Iterator for iterating over the lines in the polygon. */
+	private Iterator<Line> it;
+
+	/**
+	 * Constructs a new Polygon using the provided set of lines.
+	 *
+	 * @param polygon The lines that make up the polygon.
+	 */
 	public Polygon(LinkedHashSet<Line> polygon) {
-		 this.polygon = new LinkedHashSet<Line>();
-		 for(Line l: polygon)
-			 this.polygon.add (l);  
-		 objID = ++ classID;
-		 it = this.polygon.iterator();
+		this.polygon = new LinkedHashSet<Line>();
+		for (Line l : polygon) {
+			this.polygon.add(l);
+		}
+		objID = ++classID;
+		it = this.polygon.iterator();
 	}
-	
-	public Iterator <Line> getLine() {
+
+	/**
+	 * Returns an iterator over the lines in the polygon.
+	 *
+	 * @return An iterator over the lines in the polygon.
+	 */
+	public Iterator<Line> getLine() {
 		it = polygon.iterator();
 		return it;
 	}
-	
-	public static int classID(){
+
+	/**
+	 * Returns the current value of the static class ID counter.
+	 *
+	 * @return The current value of the class ID counter.
+	 */
+	public static int classID() {
 		return classID;
 	}
-	
-    
+
+	/**
+	 * Returns a string representation of the polygon.
+	 *
+	 * @return A string representation of the polygon, listing its lines.
+	 */
+	@Override
 	public String toString() {
 		String s = "The lines in polygon " + this.objID + " are:";
 
@@ -32,8 +65,6 @@ class Polygon {
 			s += l;
 		}
 
-    	return s;
-    }
+		return s;
+	}
 }
-
-
