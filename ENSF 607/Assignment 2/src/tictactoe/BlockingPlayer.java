@@ -40,33 +40,28 @@ public class BlockingPlayer extends RandomPlayer{
 	 * @return True if there is an opportunity to block.
 	 */
 	protected boolean testForBlocking(int row, int col) {
-		// TODO Determine opponent winning situations for current spot
-		// there are 8 winning combinations ; if 2 out of 3 spots in a winning condition are occupied, return true.
-			
-		// 
-		
-		// store row and col as string (?)
+		// there are 8 winning combinations ; if 2 out of 3 spots in a winning condition are occupied, return true.	
 		int checkSpot = row * 10 + col;
 		
 		int blockingScenario[];
+		for (int i = 0; i < blockingMap.get(checkSpot).length; i++) {
+			// retrieve the blocking scenarios from the map
+			blockingScenario = blockingMap.get(checkSpot)[i]; // blockingScenario contains {01, 02}
+				
+			markCounter(blockingScenario);
+		}
 		
+//		for (int blockingScenario1[] : blockingMap.get(checkSpot)) {			
+//			// retrieve the blocking scenarios from the map
+//			markCounter(blockingScenario1);					// blockingScenario contains {01, 02}
+//		}
 		
 		// create a switch case for each of the 9 string combinations
+		// unsure if still needed:
 		switch (checkSpot) {
 			case 00:
-				for (int i = 0; i < blockingMap.get(checkSpot).length; i++) {
-					// retrieve values from int array
-//					for (int j = 0; j < 2; j++) {
-					blockingScenario = blockingMap.get(checkSpot)[i]; // blockingScenario contains {01, 02}
-						
-					markCounter(blockingScenario);
-//					}
-				}
-				// int[][] retrievedArray = map.get(1);
-				board.getMark(row, col);
 				
 				//
-				opponentMarkCounter = 0;
 			case 01:
 				
 			case 02:
@@ -84,7 +79,6 @@ public class BlockingPlayer extends RandomPlayer{
 			case 22:
 				// check the opponent marks according to the map
 					// for 22, check spot 02 and spot 12 if there are opponent marks
-				// retrieve the blocking scenarios from the map
 		}
 		// count the number of opponent marks in each scenario inside that case
 			// possibly a method with access to a C-struct-like Java class.
@@ -95,7 +89,7 @@ public class BlockingPlayer extends RandomPlayer{
 		return false;
 	}
 	
-	
+	// TODO consider renaming markCounter
 	/**	Checks the board to see if it matches a blocking scenario
 	 * @param blockingScenario
 	 * @return true if the blocking player needs to block checkSpot
@@ -105,23 +99,18 @@ public class BlockingPlayer extends RandomPlayer{
         int col;
         int opponentMarkCounter = 0;
 		
-		// loop out here
-        // Extract the first digit
 		for (int j = 0; j < 2; j++) {
-			// then split the 2 digits apart - this is the spot
+			// reach into the array blockingScenario, then split the 2 digits apart - this is the spot
 			row = blockingScenario[j] / 10; // Extract the first digit
 	        col = blockingScenario[j] % 10;
-	        if (board.getMark(row, col) == opponent.mark){
+	        if (board.getMark(row, col) == opponent.mark){ 		// check if the spot has an opponent mark
 	        	opponentMarkCounter++;
 	        }
-	        
 		}
 		
-		// reach into the array blockingScenario
-		
-		
-        
-        // check the spot's (row, col) mark
+		if (opponentMarkCounter == 2) {
+			return true;
+		}
         // we want to count the opponent's marks in the chosen spot
         
 		return false;

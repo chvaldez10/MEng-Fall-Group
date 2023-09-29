@@ -66,9 +66,13 @@ public class Board implements Constants {
 		markCount = 0;
 	}
 
+	/** Checks the winner for a given mark.
+	 * @param mark
+	 * @return
+	 */
 	int checkWinner(char mark) {
 		int row, col;
-		int result = 0;
+		int result = 0;		// either chosen mark loses or wins
 
 		for (row = 0; result == 0 && row < 3; row++) {
 			int row_result = 1;
