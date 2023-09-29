@@ -6,9 +6,5 @@ public class SmartPlayer extends Player{
 	}
 	
 	@Override
-	public void play() {
-	}
-	
-	@Override
 	public void makeMove() {}
 }

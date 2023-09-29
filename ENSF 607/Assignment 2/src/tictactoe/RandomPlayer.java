@@ -7,9 +7,24 @@ public class RandomPlayer extends Player{
 	
 	
 	@Override
-	public void play() {
+	/**
+     * Generate random spot on the board.
+     */
+	public void makeMove() {
+		int row, col;
+		boolean isEmpty;
+		RandomGenerator randomGen = new RandomGenerator(); 
+		System.out.println(super.name + "'s turn.");
+		
+		while (true) {
+			row = randomGen.discrete(lowIndex, highIndex);
+			col = randomGen.discrete(lowIndex, highIndex);
+			isEmpty = super.isSpotEmpty(row, col);
+			
+            if (isEmpty) {
+                board.addMark(row, col, mark);
+                break; // exits the loop when a valid spot is marked
+            } 
+		}
 	}
-	
-	@Override
-	public void makeMove() {}
 }
