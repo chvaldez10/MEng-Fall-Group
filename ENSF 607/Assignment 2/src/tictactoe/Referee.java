@@ -24,6 +24,14 @@ public class Referee {
 
         board.display(); // show empty board
         
+     // test code - test cases:
+// 		board.addMark(0, 0, 'X');
+// 		board.addMark(1, 0, 'O');
+// 		board.addMark(0, 1, 'X');
+// 		board.addMark(0, 0, mark);
+// 		board.addMark(0, 0, mark);
+// 		board.addMark(0, 0, mark);
+        
         System.out.println("\nThe Referee has started the game ...\n");
         xPlayer.play(); // start the game
     }
