@@ -49,7 +49,6 @@ public class BlockingPlayer extends RandomPlayer{
 				if ((super.isSpotEmpty(row, col) == true) && (testForBlocking(row, col) == true)) {
 					System.out.println(super.name + "'s turn.");
 					board.addMark(row, col, mark);
-//					System.out.println("Blocking Player move on " + row + col);					// test code
 					blocking = true;
 					break;
 				}
@@ -60,7 +59,6 @@ public class BlockingPlayer extends RandomPlayer{
 		// Tried blocking first. If no blocking, then revert to using super.makeMove().
 		if (blocking == false) {
 			super.makeMove();
-//			System.out.println("Random Player move.");								// test code
 		}
 	}
 	
@@ -79,20 +77,16 @@ public class BlockingPlayer extends RandomPlayer{
 		
 		int blockingScenario[];
 		
-//		int testCounter_nullValue = 0;									// test code
 		
 		for (int i = 0; i < blockingMap.get(checkSpot).length; i++) {
-//			System.out.println(checkSpot);								// test code
 			
 			// retrieve the blocking scenarios from the map
 			blockingScenario = blockingMap.get(checkSpot)[i]; // blockingScenario contains {01, 02}
-//			System.out.println(Arrays.toString(blockingScenario));		// test code
 			
 			blockSpot = opponentMarkCounter(blockingScenario);
 			if (blockSpot == true) {
 				break;
 			}
-//			testCounter_nullValue++;									// test code
 		}
 
 		return blockSpot;
@@ -108,7 +102,6 @@ public class BlockingPlayer extends RandomPlayer{
 		int row;
         int col;
         int opponentMarkCounter = 0;
-//        int spaceMarkCounter = 0;
 		
 		for (int j = 0; j < 2; j++) {
 			// reach into the array blockingScenario, then split the 2 digits apart - this is the spot
@@ -116,8 +109,6 @@ public class BlockingPlayer extends RandomPlayer{
 	        col = blockingScenario[j] % 10;
 	        if (board.getMark(row, col) == opponent.mark){ 		// check if the spot has an opponent mark
 	        	opponentMarkCounter++;
-	        } else if (board.getMark(row, col) == SPACE_CHAR) {
-//	        	spaceMarkCounter++;
 	        }
 		}
 		if ((opponentMarkCounter == 2)) {
