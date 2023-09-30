@@ -1,0 +1,62 @@
+@startuml
+class Tool{
+
+- toolID : int
+- toolName : String
+- toolQuantity : int
+- toolPrice : double
+- supplierID : int
+
++ Tool(toolID : int, tool, Name : String, toolQuantity : int, toolPrice : double, supplierID : int)
+
++ getToolID() : int
++ getToolName() : String
+
++ increaseQuantity(int amount) : void
++ decreaseQuantity(int amount) : void
+
++ getSupplierID() : int
+}
+
+class Supplier{
+
+- supplierID : int
+- companyName : String
+- address : String
+- salesContact : String
+
++ Supplier(supplierID : int, companyName : String, address : String, salesContact : String)
+
++ getSupplierID() : int
++ getCompanyName() : String
+} 
+
+class StockManager{
+
+- toolList : ArrayList<Tool>
+- supplierList : ArrayList<Tool>
+- shoppingList : TreeMap<Tool, Integer>
+
++ addTool(tool : Tool) : void
++ deleteTool(toolID : int) : void
++ searchToolByID() : Tool
++ searchToolByName() : Tool
+
++ getSupplier(): Supplier
+
++ checkInventoryLevel(): void
++ addToShoppingList(tool : Tool, quantity : int)
++ createOrder() : void
+}
+
+class FileUtilities{
++ {static} writeOrderFile() : void
++ {static} readToolsFile() : ArrayList<Tool>
++ {static} readSupplierFile() : ArrayList<Supplier>
+}
+
+Tool *-- StockManager : has-a
+Supplier *-- StockManager : has-a
+FileUtilities <-- StockManager : uses
+
+@enduml
