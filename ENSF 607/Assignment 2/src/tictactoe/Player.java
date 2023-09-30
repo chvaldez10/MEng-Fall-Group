@@ -38,7 +38,7 @@ abstract class Player implements Constants{
         }
 
         if (isGameOver()) {
-        	board.display();		// Testing if this will display the board before the game ends
+        	board.display();
             displayGameResult();
         } else {
             board.display();
