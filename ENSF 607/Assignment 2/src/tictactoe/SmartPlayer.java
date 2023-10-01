@@ -28,12 +28,10 @@ public class SmartPlayer extends BlockingPlayer {
     public void makeMove() {
         if (makeWinningMove()) {
             return; // Made a winning move
-        } else if (makeBlockingMove()) {
+        } else  {
+        	super.makeMove();
             return; // Made a blocking move
-        } else {
-            // No winning or blocking move available, make a random move
-            makeRandomMove();
-        }
+        } 
     }
 
     /**
@@ -55,24 +53,7 @@ public class SmartPlayer extends BlockingPlayer {
         return false;
     }
 
-    /**
-     * Attempts to make a move to block the opponent from winning on the next move.
-     *
-     * @return True if a blocking move is made, false otherwise.
-     */
-    private boolean makeBlockingMove() {
-        // Iterate through the board and check for a spot to block the opponent
-        for (int row = lowIndex; row <= highIndex; row++) {
-            for (int col = lowIndex; col <= highIndex; col++) {
-                if (isSpotEmpty(row, col) && testForBlocking(row, col)) {
-                    System.out.println(super.name + "'s turn.");
-                    board.addMark(row, col, mark);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+
 
     /**
      * Checks if there is an opportunity to win the game at the specified row and column.
@@ -89,24 +70,5 @@ public class SmartPlayer extends BlockingPlayer {
         return isWinningMove;
     }
 
-    /**
-     * Makes a random move on the board.
-     */
-    private void makeRandomMove() {
-        int row, col;
-        boolean isEmpty;
-        RandomGenerator randomGen = new RandomGenerator();
-        System.out.println(super.name + "'s turn.");
 
-        while (true) {
-            row = randomGen.discrete(lowIndex, highIndex);
-            col = randomGen.discrete(lowIndex, highIndex);
-            isEmpty = isSpotEmpty(row, col);
-
-            if (isEmpty) {
-                board.addMark(row, col, mark);
-                return; // exits the loop when a valid spot is marked
-            }
-        }
-    }
 }
