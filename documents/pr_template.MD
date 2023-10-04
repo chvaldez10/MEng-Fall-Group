@@ -2,17 +2,15 @@
 
 **Task**: ENSF[ 123 ] - [ Assignment1 ex 2 ]
 
-<!-- include the course and assignment/project -->
-
 ### 📝 Description:
 
-<!-- include a description of changes related to task. -->
+<!-- list of changes related to task. -->
 
 ---
 
 ### 🪄 Sidequest (s):
 
-## <!-- include a description of changes not related to task. -->
+<!-- list of changes not related to task. -->
 
 ### 📓 Type of Change (s):
 
