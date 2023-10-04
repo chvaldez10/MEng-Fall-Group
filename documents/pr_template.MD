@@ -12,6 +12,8 @@
 
 <!-- list of changes not related to task. -->
 
+---
+
 ### 📓 Type of Change (s):
 
 - [ ] 🐞 Bug fix (non-breaking change which fixes an issue)
