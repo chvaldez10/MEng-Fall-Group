@@ -1,13 +1,18 @@
-package exercise1;
-import java.sql.*;
+package student;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * This Java program demonstrates database operations using JDBC (Java Database Connectivity).
  * It connects to a MySQL database, creates tables, inserts sample data, and queries the tables.
  * The database used is "student_registration," and it assumes a local MySQL server with the following credentials:
  * - Database URL: jdbc:mysql://localhost:3306/student_registration
- * - Username: root
- * - Password: root
+ * - USERNAME: root
+ * - PASSWORD: root
  *
  * The program performs the following tasks:
  * 1. Establish a database connection.
@@ -19,20 +24,21 @@ import java.sql.*;
 
  */
 
-public class MySQL {
+public class StudentRegistration {
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/student_registration";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "root";
+	
     public static void main(String[] args) {
-        String jdbcURL = "jdbc:mysql://localhost:3306/student_registration";
-        String username = "root";
-        String password = "root";
-
         try {
-            Connection connection = DriverManager.getConnection(jdbcURL, username, password);
+            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
 
-            // Drop and create tables with primary keys and foreign keys
-            dropAndCreateTable(statement, "Student");
-            dropAndCreateTable(statement, "Course");
-            dropAndCreateTable(statement, "Registration");
+            // drop tables
+            dropTables(statement);
+            
+            //create tables
+            createTables(statement);
 
             // Insert sample data into the tables
             insertSampleData(statement);
@@ -54,33 +60,42 @@ public class MySQL {
         }
     }
 
-    // Helper method to drop a table if it exists and then create it
-    private static void dropAndCreateTable(Statement statement, String tableName) throws SQLException {
-        statement.executeUpdate("DROP TABLE IF EXISTS " + tableName);
-
-        if ("Student".equals(tableName)) {
-            // Create Student table
-            statement.executeUpdate("CREATE TABLE Student (" +
-                    "StudentId VARCHAR(10) PRIMARY KEY," +
-                    "FirstName VARCHAR(50)," +
-                    "LastName VARCHAR(50)," +
-                    "Location VARCHAR(100))");
-        } else if ("Course".equals(tableName)) {
-            // Create Course table
-            statement.executeUpdate("CREATE TABLE Course (" +
-                    "CourseId VARCHAR(10) PRIMARY KEY," +
-                    "CourseName VARCHAR(50)," +
-                    "CourseTitle VARCHAR(50))");
-        } else if ("Registration".equals(tableName)) {
-            // Create Registration table with foreign keys
-            statement.executeUpdate("CREATE TABLE Registration (" +
-                    "RegistrationId VARCHAR(10) PRIMARY KEY," +
-                    "CourseId VARCHAR(10)," +
-                    "StudentId VARCHAR(10)," +
-                    "FOREIGN KEY (CourseId) REFERENCES Course(CourseId)," +
-                    "FOREIGN KEY (StudentId) REFERENCES Student(StudentId))");
-        }
+    private static void dropTables(Statement statement) throws SQLException {
+        // Drop tables in the correct order to avoid foreign key constraints issues
+        statement.executeUpdate("DROP TABLE IF EXISTS Registration");
+        statement.executeUpdate("DROP TABLE IF EXISTS Course");
+        statement.executeUpdate("DROP TABLE IF EXISTS Student");
     }
+
+    private static void createTables(Statement statement) throws SQLException {
+        // Create Student table
+        statement.executeUpdate(
+            "CREATE TABLE Student (" +
+            "StudentId VARCHAR(10) PRIMARY KEY," +
+            "FirstName VARCHAR(50)," +
+            "LastName VARCHAR(50)," +
+            "Location VARCHAR(100))"
+        );
+
+        // Create Course table
+        statement.executeUpdate(
+            "CREATE TABLE Course (" +
+            "CourseId VARCHAR(10) PRIMARY KEY," +
+            "CourseName VARCHAR(50)," +
+            "CourseTitle VARCHAR(50))"
+        );
+
+        // Create Registration table
+        statement.executeUpdate(
+            "CREATE TABLE Registration (" +
+            "RegistrationId VARCHAR(10) PRIMARY KEY," +
+            "CourseId VARCHAR(10)," +
+            "StudentId VARCHAR(10)," +
+            "FOREIGN KEY (CourseId) REFERENCES Course(CourseId)," +
+            "FOREIGN KEY (StudentId) REFERENCES Student(StudentId))"
+        );
+    }
+
 
     // Helper method to insert sample data into the tables
     private static void insertSampleData(Statement statement) throws SQLException {

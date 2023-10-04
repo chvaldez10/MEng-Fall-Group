@@ -9,8 +9,8 @@ import java.sql.Statement;
  * It connects to a MySQL database, creates tables, inserts sample data, and queries the tables.
  * The database used is "student_registration," and it assumes a local MySQL server with the following credentials:
  * - Database URL: jdbc:mysql://localhost:3306/student_registration
- * - Username: root
- * - Password: root
+ * - USERNAME: root
+ * - PASSWORD: root
  *
  * The program performs the following tasks:
  * 1. Establish a database connection.
@@ -24,12 +24,12 @@ import java.sql.Statement;
 
 public class MySQL {
     public static void main(String[] args) {
-        String jdbcURL = "jdbc:mysql://localhost:3306/student_registration";
-        String username = "root";
-        String password = "root";
+        String JDBC_URL = "jdbc:mysql://localhost:3306/student_registration";
+        String USERNAME = "root";
+        String PASSWORD = "root";
 
         try {
-            Connection connection = DriverManager.getConnection(jdbcURL, username, password);
+            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
 
             // Drop and create tables with primary keys and foreign keys
