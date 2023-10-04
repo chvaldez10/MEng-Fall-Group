@@ -20,8 +20,6 @@ import java.sql.Statement;
  * 3. Insert sample data into the tables.
  * 4. Query and print data from the tables (Students, Courses, Registrations).
  *
- *
-
  */
 
 public class StudentRegistration {
@@ -99,25 +97,64 @@ public class StudentRegistration {
 
     // Helper method to insert sample data into the tables
     private static void insertSampleData(Statement statement) throws SQLException {
-        // Insert data into Student table
-        statement.executeUpdate("INSERT INTO Student (StudentId, FirstName, LastName, Location) " +
-                "VALUES ('S1', 'John', 'Doe', 'New York')");
-        statement.executeUpdate("INSERT INTO Student (StudentId, FirstName, LastName, Location) " +
-                "VALUES ('S2', 'Jane', 'Smith', 'Los Angeles')");
-
-        // Insert data into Course table
-        statement.executeUpdate("INSERT INTO Course (CourseId, CourseName, CourseTitle) " +
-                "VALUES ('C1', 'Math', 'Algebra')");
-        statement.executeUpdate("INSERT INTO Course (CourseId, CourseName, CourseTitle) " +
-                "VALUES ('C2', 'Science', 'Biology')");
-
-        // Insert data into Registration table
-        statement.executeUpdate("INSERT INTO Registration (RegistrationId, CourseId, StudentId) " +
-                "VALUES ('R1', 'C1', 'S1')");
-        statement.executeUpdate("INSERT INTO Registration (RegistrationId, CourseId, StudentId) " +
-                "VALUES ('R2', 'C2', 'S2')");
+        insertStudentsData(statement);
+        insertCoursesData(statement);
+        insertRegistrationsData(statement);
     }
 
+    private static void insertStudentsData(Statement statement) throws SQLException {
+        String[] students = {
+            "('S1', 'John', 'Doe', 'New York')",
+            "('S2', 'Jane', 'Smith', 'Los Angeles')",
+            "('S3', 'Robert', 'Brown', 'Chicago')",
+            "('S4', 'Linda', 'Johnson', 'Houston')",
+            "('S5', 'Michael', 'Williams', 'Phoenix')",
+            "('S6', 'Elizabeth', 'Jones', 'Philadelphia')",
+            "('S7', 'David', 'Garcia', 'San Antonio')",
+            "('S8', 'Sarah', 'Martinez', 'San Diego')",
+            "('S9', 'Daniel', 'Rodriguez', 'Dallas')",
+            "('S10', 'Emily', 'Taylor', 'San Jose')"
+        };
+
+        for (String student : students) {
+            statement.executeUpdate("INSERT INTO Student (StudentId, FirstName, LastName, Location) VALUES " + student);
+        }
+    }
+
+    private static void insertCoursesData(Statement statement) throws SQLException {
+        String[] courses = {
+            "('C1', 'Math', 'Algebra 101')",
+            "('C2', 'Science', 'Biology 101')",
+            "('C3', 'English', 'Literature 101')",
+            "('C4', 'History', 'World History 101')"
+        };
+
+        for (String course : courses) {
+            statement.executeUpdate("INSERT INTO Course (CourseId, CourseName, CourseTitle) VALUES " + course);
+        }
+    }
+    
+    private static void insertRegistrationsData(Statement statement) throws SQLException {
+        String[] registrations = {
+            "('R1', 'C1', 'S1')",  
+            "('R2', 'C2', 'S2')",  
+            "('R3', 'C3', 'S3')",  
+            "('R4', 'C4', 'S4')",  
+            "('R5', 'C1', 'S5')",
+            "('R6', 'C2', 'S6')",  
+            "('R7', 'C3', 'S7')",  
+            "('R8', 'C4', 'S8')",  
+            "('R9', 'C1', 'S9')",  
+            "('R10', 'C2', 'S10')", 
+            "('R11', 'C3', 'S1')", 
+            "('R12', 'C4', 'S2')"   
+        };
+
+        for (String registration : registrations) {
+            statement.executeUpdate("INSERT INTO Registration (RegistrationId, CourseId, StudentId) VALUES " + registration);
+        }
+    }
+    
     // Helper method to query and print students
     private static void queryStudents(Statement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Student");
