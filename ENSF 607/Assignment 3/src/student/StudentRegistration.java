@@ -8,34 +8,48 @@ import java.sql.Statement;
 
 /**
  * This Java program demonstrates database operations using JDBC (Java Database Connectivity).
- * It connects to a MySQL database, creates tables, inserts sample data, and queries the tables.
- * The database used is "student_registration," and it assumes a local MySQL server with the following credentials:
+ * 
+ * It connects to a local MySQL database, creates tables, inserts sample data, and queries the tables.
+ * 
+ * The database used is "student_registration,". The program drops the database if exists and creates it.
+ * 		Note: This method of deleting/creating database is OKAY for a small sized group assignment.
+ * 
+ * The program assumes a local MySQL server with the following credentials:
  * - Database URL: jdbc:mysql://localhost:3306/student_registration
  * - USERNAME: root
  * - PASSWORD: root
  *
  * The program performs the following tasks:
  * 1. Establish a database connection.
- * 2. Drop and create tables (Student, Course, Registration) with primary keys and foreign keys.
- * 3. Insert sample data into the tables.
- * 4. Query and print data from the tables (Students, Courses, Registrations).
+ * 2. Drop and create student_registration database.
+ * 3. Drop and create tables (Student, Course, Registration) with primary keys and foreign keys.
+ * 4. Insert sample data into the tables.
+ * 5. Query and print data from the tables (Students, Courses, Registrations).
  *
  */
 
 public class StudentRegistration {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/student_registration";
+    private static final String JDBC_ROOT_URL = "jdbc:mysql://localhost:3306";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
-	
+    
     public static void main(String[] args) {
         try {
+        	// drop database
+        	dropDatabase();
+        	
+        	// create database
+        	createDatabase();
+        	
+        	// connect to student registration
             Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
-
+            
             // drop tables
             dropTables(statement);
             
-            //create tables
+            // create tables
             createTables(statement);
 
             // Insert sample data into the tables
@@ -58,15 +72,61 @@ public class StudentRegistration {
         }
     }
 
+    /**
+     * Drops the student_registration database if it exists.
+     *
+     * @throws SQLException if any SQL error occurs.
+     */
+    private static void dropDatabase() throws SQLException {
+        try(Connection conn = DriverManager.getConnection(JDBC_ROOT_URL, USERNAME, PASSWORD);
+           Statement stmt = conn.createStatement();
+        ) {		      
+           String sql = "DROP DATABASE IF EXISTS student_registration";
+           stmt.executeUpdate(sql);
+           System.out.println("Dropping student_registration if it exists ...");   	  
+        } catch (SQLException e) {
+           e.printStackTrace();
+        } 
+    }
+    
+    /**
+     * Creates the student_registration database.
+     *
+     * @throws SQLException if any SQL error occurs.
+     */
+    private static void createDatabase() throws SQLException {
+        try(Connection conn = DriverManager.getConnection(JDBC_ROOT_URL, USERNAME, PASSWORD);
+           Statement stmt = conn.createStatement();
+        ) {		      
+           String sql = "CREATE DATABASE student_registration";
+           stmt.executeUpdate(sql);
+           System.out.println("Creating student_registration ...");   	  
+        } catch (SQLException e) {
+           e.printStackTrace();
+        } 
+    }
+    
+    /**
+     * Drops the tables (Student, Course, Registration) if they exist.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void dropTables(Statement statement) throws SQLException {
-        // Drop tables in the correct order to avoid foreign key constraints issues
         statement.executeUpdate("DROP TABLE IF EXISTS Registration");
         statement.executeUpdate("DROP TABLE IF EXISTS Course");
         statement.executeUpdate("DROP TABLE IF EXISTS Student");
     }
 
+    
+    /**
+     * Creates the tables (Student, Course, Registration) with appropriate keys.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void createTables(Statement statement) throws SQLException {
-        // Create Student table
+        // Student table
         statement.executeUpdate(
             "CREATE TABLE Student (" +
             "StudentId VARCHAR(10) PRIMARY KEY," +
@@ -75,7 +135,7 @@ public class StudentRegistration {
             "Location VARCHAR(100))"
         );
 
-        // Create Course table
+        // Course table
         statement.executeUpdate(
             "CREATE TABLE Course (" +
             "CourseId VARCHAR(10) PRIMARY KEY," +
@@ -83,7 +143,7 @@ public class StudentRegistration {
             "CourseTitle VARCHAR(50))"
         );
 
-        // Create Registration table
+        // Registration table
         statement.executeUpdate(
             "CREATE TABLE Registration (" +
             "RegistrationId VARCHAR(10) PRIMARY KEY," +
@@ -94,14 +154,24 @@ public class StudentRegistration {
         );
     }
 
-
-    // Helper method to insert sample data into the tables
+    /**
+     * Inserts sample data into the tables (Student, Course, Registration).
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void insertSampleData(Statement statement) throws SQLException {
         insertStudentsData(statement);
         insertCoursesData(statement);
         insertRegistrationsData(statement);
     }
 
+    /**
+     * Inserts sample student data into the Student table.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void insertStudentsData(Statement statement) throws SQLException {
         String[] students = {
             "('S1', 'John', 'Doe', 'New York')",
@@ -120,7 +190,13 @@ public class StudentRegistration {
             statement.executeUpdate("INSERT INTO Student (StudentId, FirstName, LastName, Location) VALUES " + student);
         }
     }
-
+    
+    /**
+     * Inserts sample course data into the Course table.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void insertCoursesData(Statement statement) throws SQLException {
         String[] courses = {
             "('C1', 'Math', 'Algebra 101')",
@@ -134,6 +210,12 @@ public class StudentRegistration {
         }
     }
     
+    /**
+     * Inserts sample registration data into the Registration table.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void insertRegistrationsData(Statement statement) throws SQLException {
         String[] registrations = {
             "('R1', 'C1', 'S1')",  
@@ -155,7 +237,12 @@ public class StudentRegistration {
         }
     }
     
-    // Helper method to query and print students
+    /**
+     * Queries and prints all students from the Student table.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void queryStudents(Statement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Student");
         while (resultSet.next()) {
@@ -167,7 +254,12 @@ public class StudentRegistration {
         }
     }
 
-    // Helper method to query and print courses
+    /**
+     * Queries and prints all courses from the Course table.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void queryCourses(Statement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Course");
         while (resultSet.next()) {
@@ -178,7 +270,12 @@ public class StudentRegistration {
         }
     }
 
-    // Helper method to query and print registrations
+    /**
+     * Queries and prints all registrations from the Registration table.
+     *
+     * @param statement the SQL statement object.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void queryRegistrations(Statement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Registration");
         while (resultSet.next()) {
