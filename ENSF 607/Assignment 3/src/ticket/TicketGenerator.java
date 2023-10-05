@@ -1,3 +1,5 @@
+package ticket;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,12 +13,12 @@ public class TicketGenerator {
     public static void main(String[] args) {
         try {
             // Database connection parameters
-            String jdbcURL = "jdbc:mysql://localhost:3306/tickets";
-            String username = "root";
-            String password = "root";
+            String JDBC_URL = "jdbc:mysql://localhost:3306/tickets";
+            String USERNAME = "root";
+            String PASSWORD = "root";
 
             // Establish a database connection
-            Connection connection = DriverManager.getConnection(jdbcURL, username, password);
+            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 
             // Create the EventActivity, EventOrigin, EventStatus, and EventClass tables and populate them
             dropAndCreateTables(connection);
@@ -81,7 +83,7 @@ public class TicketGenerator {
                 + "('Design'), "
                 + "('Construction'), "
                 + "('Test'), "
-                + "('Password Reset')";
+                + "('PASSWORD Reset')";
 
         // Drop EventOrigin table if it exists
         String dropEventOriginTable = "DROP TABLE IF EXISTS EventOrigin";
