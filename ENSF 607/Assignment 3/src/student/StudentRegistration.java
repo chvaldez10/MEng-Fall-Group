@@ -46,6 +46,8 @@ public class StudentRegistration {
             Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
             
+            System.out.println("connection string = " + connection);
+            
             // drop tables
             dropTables(statement);
             
