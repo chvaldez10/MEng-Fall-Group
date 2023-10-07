@@ -10,7 +10,8 @@ This repo is for Team 🍚 to share code during the fall term.
 
 ## Outstanding Tasks
 
-- ENSF 607 Assignment 2 report 📥
+- ENSF 607 Assignment 3 ticket visualization / dashboard 📈📊
+- ENSF 607 Assignment 3 report 📥
 
 ## Deadlines 📅:
 
