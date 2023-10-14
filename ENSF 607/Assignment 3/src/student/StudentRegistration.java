@@ -46,8 +46,6 @@ public class StudentRegistration {
             Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
             
-            System.out.println("connection string = " + connection);
-            
             // drop tables
             dropTables(statement);
             
@@ -85,7 +83,7 @@ public class StudentRegistration {
         ) {		      
            String sql = "DROP DATABASE IF EXISTS student_registration";
            stmt.executeUpdate(sql);
-           System.out.println("Dropping student_registration if it exists ...");   	  
+           System.out.println("Droped student_registration if it exists ...\n");   	  
         } catch (SQLException e) {
            e.printStackTrace();
         } 
@@ -102,7 +100,7 @@ public class StudentRegistration {
         ) {		      
            String sql = "CREATE DATABASE student_registration";
            stmt.executeUpdate(sql);
-           System.out.println("Creating student_registration ...");   	  
+           System.out.println("Created student_registration ...\n");   	  
         } catch (SQLException e) {
            e.printStackTrace();
         } 
@@ -127,7 +125,7 @@ public class StudentRegistration {
      * @param statement the SQL statement object.
      * @throws SQLException if any SQL error occurs.
      */
-    private static void createTables(Statement statement) throws SQLException {
+    private static void createTables(Statement statement) throws SQLException { 	  
         // Student table
         statement.executeUpdate(
             "CREATE TABLE Student (" +
@@ -154,6 +152,8 @@ public class StudentRegistration {
             "FOREIGN KEY (CourseId) REFERENCES Course(CourseId)," +
             "FOREIGN KEY (StudentId) REFERENCES Student(StudentId))"
         );
+        
+        System.out.println("Created Student, Course, and Registration tables ...\n");  
     }
 
     /**
@@ -246,7 +246,9 @@ public class StudentRegistration {
      * @throws SQLException if any SQL error occurs.
      */
     private static void queryStudents(Statement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM Student");
+        System.out.println("Querying all data from Student:");
+    	
+    	ResultSet resultSet = statement.executeQuery("SELECT * FROM Student");
         while (resultSet.next()) {
             String studentId = resultSet.getString("StudentId");
             String firstName = resultSet.getString("FirstName");
@@ -254,6 +256,7 @@ public class StudentRegistration {
             String location = resultSet.getString("Location");
             System.out.println("Student: " + studentId + ", " + firstName + " " + lastName + ", " + location);
         }
+        System.out.println();
     }
 
     /**
@@ -263,6 +266,8 @@ public class StudentRegistration {
      * @throws SQLException if any SQL error occurs.
      */
     private static void queryCourses(Statement statement) throws SQLException {
+    	System.out.println("Querying all data from Courses:");
+    	
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Course");
         while (resultSet.next()) {
             String courseId = resultSet.getString("CourseId");
@@ -270,6 +275,8 @@ public class StudentRegistration {
             String courseTitle = resultSet.getString("CourseTitle");
             System.out.println("Course: " + courseId + ", " + courseName + ", " + courseTitle);
         }
+        
+        System.out.println();
     }
 
     /**
@@ -279,6 +286,8 @@ public class StudentRegistration {
      * @throws SQLException if any SQL error occurs.
      */
     private static void queryRegistrations(Statement statement) throws SQLException {
+    	System.out.println("Querying all data from Registration:");
+    	
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Registration");
         while (resultSet.next()) {
             String registrationId = resultSet.getString("RegistrationId");
@@ -286,5 +295,7 @@ public class StudentRegistration {
             String studentId = resultSet.getString("StudentId");
             System.out.println("Registration: " + registrationId + ", Course: " + courseId + ", Student: " + studentId);
         }
+        
+        System.out.println();
     }
 }
