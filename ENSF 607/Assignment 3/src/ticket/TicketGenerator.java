@@ -9,17 +9,32 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * A class for generating random tickets and inserting them into a SQL database.
+ */
 public class TicketGenerator {
-    public static void main(String[] args) {
+    
+	// Database connection parameters
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/tickets";
+    private static final String JDBC_ROOT_URL = "jdbc:mysql://localhost:3306";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "root";
+    private static final String DATABASE_NAME = "tickets";
+	
+	
+	public static void main(String[] args) {
         try {
-            // Database connection parameters
-            String JDBC_URL = "jdbc:mysql://localhost:3306/tickets";
-            String USERNAME = "root";
-            String PASSWORD = "root";
-
-            // Establish a database connection
+            
+            // drop database
+        	dropDatabase(DATABASE_NAME);
+        	
+        	// create database
+        	createDatabase(DATABASE_NAME);
+            
+        	// Establish a database connection
             Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-
+        	
             // Create the EventActivity, EventOrigin, EventStatus, and EventClass tables and populate them
             dropAndCreateTables(connection);
 
@@ -46,13 +61,13 @@ public class TicketGenerator {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date startDate = dateFormat.parse(startDateStr);
             Date endDate = dateFormat.parse(endDateStr);
-
+            
             // Generate and insert tickets into the EventLog table
             for (int i = 1; i <= numTickets; i++) {
                 // Generate random start and end dates within the specified time window
                 Date randomStartDate = generateRandomDate(startDate, endDate);
                 Date randomEndDate = generateRandomDate(randomStartDate, endDate);
-
+                
                 insertTicket(connection, i, randomStartDate, randomEndDate, activities, origins, status, classes);
             }
 
@@ -62,7 +77,41 @@ public class TicketGenerator {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Drops the specified database if it exists.
+     *
+     * @throws SQLException if any SQL error occurs.
+     */
+    private static void dropDatabase(String database_name) throws SQLException {
+        try(Connection conn = DriverManager.getConnection(JDBC_ROOT_URL, USERNAME, PASSWORD);
+           Statement stmt = conn.createStatement();
+        ) {		      
+           String sql = "DROP DATABASE IF EXISTS "+ database_name;
+           stmt.executeUpdate(sql);
+           System.out.println("Dropped a database named \""+ database_name + "\"  ...\n");   	  
+        } catch (SQLException e) {
+           e.printStackTrace();
+        } 
+    }
+    
+    /**
+     * Creates the specified database.
+     *
+     * @throws SQLException if any SQL error occurs.
+     */
+    private static void createDatabase(String database_name) throws SQLException {
+        try(Connection conn = DriverManager.getConnection(JDBC_ROOT_URL, USERNAME, PASSWORD);
+           Statement stmt = conn.createStatement();
+        ) {		      
+           String sql = "CREATE DATABASE "+ database_name;
+           stmt.executeUpdate(sql);
+           System.out.println("Created a database named \""+ database_name +"\" ...\n");   	  
+        } catch (SQLException e) {
+           e.printStackTrace();
+        } 
+    }
+    
     // Helper method to generate a random date within a given time window
     private static Date generateRandomDate(Date startDate, Date endDate) {
         long startTime = startDate.getTime();
@@ -71,7 +120,12 @@ public class TicketGenerator {
         return new Date(randomTime);
     }
 
-
+    /**
+     * Drops and recreates tables for EventActivity, EventOrigin, EventStatus, and EventClass in the database.
+     *
+     * @param connection The database connection to execute SQL statements.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void dropAndCreateTables(Connection connection) throws SQLException {
         // Drop EventActivity table if it exists
         String dropEventActivityTable = "DROP TABLE IF EXISTS EventActivity";
@@ -139,7 +193,13 @@ public class TicketGenerator {
             statement.executeUpdate(insertEventClassValues);
         }
     }
-
+    
+    /**
+     * Drops the EventLog table if it exists and then creates a new EventLog table in the database.
+     *
+     * @param connection The database connection to execute SQL statements.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void dropAndCreateEventLogTable(Connection connection) throws SQLException {
         // Drop EventLog table if it exists
         String dropTableSQL = "DROP TABLE IF EXISTS EventLog";
@@ -167,7 +227,20 @@ public class TicketGenerator {
         createStatement.execute();
         createStatement.close();
     }
-
+    
+    /**
+     * Inserts a ticket into the EventLog table with random data.
+     *
+     * @param connection  The database connection to execute SQL statements.
+     * @param ticketNumber The number of the ticket to insert.
+     * @param startDate    The start date of the ticket.
+     * @param endDate      The end date of the ticket.
+     * @param activities   An array of activity names.
+     * @param origins      An array of origin names.
+     * @param status       An array of ticket status values.
+     * @param classes      An array of ticket classes.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static void insertTicket(Connection connection, int ticketNumber, Date startDate, Date endDate,
                                       String[] activities, String[] origins, String[] status, String[] classes)
             throws SQLException {
@@ -205,7 +278,14 @@ public class TicketGenerator {
             preparedStatement.executeUpdate();
         }
     }
-
+    
+    /**
+     * Calculates the priority of a ticket based on its impact and urgency.
+     *
+     * @param impact  The impact level of the ticket (1, 2, or 3).
+     * @param urgency The urgency level of the ticket (1, 2, or 3).
+     * @return The calculated priority of the ticket.
+     */
     private static int calculatePriority(int impact, int urgency) {
         if (impact == 1 && urgency == 1) {
             return 1;
@@ -227,7 +307,16 @@ public class TicketGenerator {
             return 5; // impact == 3 && urgency == 3
         }
     }
-
+    
+    /**
+     * Fetches data from the specified database table and column and returns it as an array of strings.
+     *
+     * @param connection The database connection to execute the query.
+     * @param tableName  The name of the table to fetch data from.
+     * @param columnName The name of the column to retrieve data.
+     * @return An array of strings containing the retrieved data.
+     * @throws SQLException if any SQL error occurs.
+     */
     private static String[] fetchDataFromDB(Connection connection, String tableName, String columnName) throws SQLException {
         List<String> data = new ArrayList<>();
         String query = "SELECT " + columnName + " FROM " + tableName;
