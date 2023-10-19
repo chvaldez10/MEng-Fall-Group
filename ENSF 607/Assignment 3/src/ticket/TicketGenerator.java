@@ -1,6 +1,7 @@
 package ticket;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,8 +23,15 @@ public class TicketGenerator {
     private static final String PASSWORD = "root";
     private static final String DATABASE_NAME = "tickets";
 	
+    static int numTickets;
+    static Date startDate;
+    static Date endDate;
 	
 	public static void main(String[] args) {
+		// here
+		
+		getUserInput();
+		
         try {
             
             // drop database
@@ -46,21 +54,6 @@ public class TicketGenerator {
             String[] origins = fetchDataFromDB(connection, "EventOrigin", "Origin");
             String[] status = fetchDataFromDB(connection, "EventStatus", "Status");
             String[] classes = fetchDataFromDB(connection, "EventClass", "Class");
-
-            // Input parameters from the user
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Number of tickets to generate: ");
-            int numTickets = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
-            System.out.print("Time window start date (yyyy-MM-dd): ");
-            String startDateStr = scanner.nextLine();
-            System.out.print("Time window end date (yyyy-MM-dd): ");
-            String endDateStr = scanner.nextLine();
-            scanner.close();
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date startDate = dateFormat.parse(startDateStr);
-            Date endDate = dateFormat.parse(endDateStr);
             
             // Generate and insert tickets into the EventLog table
             for (int i = 1; i <= numTickets; i++) {
@@ -119,7 +112,82 @@ public class TicketGenerator {
         long randomTime = startTime + (long) (Math.random() * (endTime - startTime));
         return new Date(randomTime);
     }
+    
+    /**
+     * Captures user input for generating tickets and validates the input.
+     *
+     * This method prompts the user for the number of tickets to generate, start date,
+     * and end date. It validates each input for correctness, ensuring that the number
+     * of tickets is an integer and that start and end dates are provided in the
+     * "yyyy-MM-dd" format. Additionally, it checks that the end date is later than
+     * or equal to the start date.
+     *
+     * @throws Exception if any input validation or parsing error occurs.
+     */
 
+    public static void getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            // Validate numTickets input
+            boolean validNumTickets = false;
+            while (!validNumTickets) {
+                System.out.print("Number of tickets to generate: ");
+                if (scanner.hasNextInt()) {
+                    numTickets = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline character
+                    validNumTickets = true;
+                } else {
+                    System.out.println("Invalid input. Please enter a valid integer.");
+                    scanner.nextLine(); // Consume the invalid input
+                }
+            }
+
+            // Validate startDate input
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            boolean validStartDate = false;
+            while (!validStartDate) {
+                System.out.print("Time window start date (yyyy-MM-dd): ");
+                String startDateStr = scanner.nextLine();
+
+                try {
+                    startDate = dateFormat.parse(startDateStr);
+                    validStartDate = true;
+                } catch (ParseException e) {
+                    System.out.println("Invalid date format. Please enter a date in yyyy-MM-dd format.");
+                }
+            }
+
+            // Validate endDate input
+            boolean validEndDate = false;
+            while (!validEndDate) {
+                System.out.print("Time window end date (yyyy-MM-dd): ");
+                String endDateStr = scanner.nextLine();
+
+                try {
+                    endDate = dateFormat.parse(endDateStr);
+                    if (endDate.after(startDate) || endDate.equals(startDate)) {
+                        validEndDate = true;
+                    } else {
+                        System.out.println("End date must be later than or equal to the start date.");
+                    }
+                } catch (ParseException e) {
+                    System.out.println("Invalid date format. Please enter a date in yyyy-MM-dd format.");
+                }
+            }
+
+            // Process the user input (e.g., generate tickets based on the input)
+
+            System.out.println("Number of tickets: " + numTickets);
+            System.out.println("Start Date: " + dateFormat.format(startDate));
+            System.out.println("End Date: " + dateFormat.format(endDate));
+
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+    
     /**
      * Drops and recreates tables for EventActivity, EventOrigin, EventStatus, and EventClass in the database.
      *
@@ -329,5 +397,3 @@ public class TicketGenerator {
         return data.toArray(new String[0]);
     }
 }
-
-
