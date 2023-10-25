@@ -10,43 +10,31 @@ This repo is for Team 🍚 to share code during the fall term.
 
 ## Outstanding Tasks
 
-- ENSF 607 Assignment 3 ticket visualization / dashboard 📈📊
-- ENSF 607 Assignment 3 report 📥
+- ENSF 612 Presentation 2📥
 
 ## Deadlines 📅:
 
-| Deadline                             | Weight  |  Due Date |
-| :----------------------------------- | :-----: | --------: |
-| ~~ENSF 607 Assignment 2~~                |   ~~10%~~   |    ~~Oct 06~~ |
-| ENSF 612 Presentation 1              |   5%    | Oct 02-13 |
-| ENSF 607 Assignment 3                |   10%   |    Oct 20 |
-| ENSF 612 Presentation 2              |   5%    | Oct 23-27 |
-| ENSF 607 Group Project               |   20%   |    Nov 24 |
-| ENSF 612 Presentation 3              |   5%    | Nov 20-24 |
-| ENSF 608 Group Project               |   30%   |    Dec 03 |
-| ENSF 612 Final Report + Data Quality | 20%+20% |     Dec15 |
+| Deadline                             | Weight  |   Due Date |
+| :----------------------------------- | :-----: | ---------: |
+| ~~ENSF 607 Assignment 2~~            | ~~10%~~ | ~~Oct 06~~ |
+| ~~ENSF 612 Presentation 1~~          |   5%    |  Oct 02-13 |
+| ~~ENSF 607 Assignment 3~~            |   10%   |     Oct 20 |
+| ENSF 612 Presentation 2              |   5%    |  Oct 23-27 |
+| ENSF 607 Group Project               |   20%   |     Nov 24 |
+| ENSF 612 Presentation 3              |   5%    |  Nov 20-24 |
+| ENSF 608 Group Project               |   30%   |     Dec 03 |
+| ENSF 612 Final Report + Data Quality | 20%+20% |      Dec15 |
 
 ## Folder Structure
 
 - 📁 **MEng-Fall-Group** (Root folder)
   - 📁 **ENSF 607**
     - 📁 **Assignment 2**
-      - 📁 **src**
-        - **inheritance**
-        - **tictactoe**
-      - 📷 **media**
-      - 📝 **documents**
     - 📁 **Assignment 3**
-      - 📁 **src**
-          - **student**
-          - **ticket**
-      - 📷 **media**
-      - 📝 **documents**
     - 📁 **Group Project**
     - 📁 **Playground**
       - 📁 **Chioma**
       - 📁 **Christian**
-        - 📁 **Assignment 1**
       - 📁 **Redge**
       - 📄 README.md
   - 📁 **ENSF 608**
