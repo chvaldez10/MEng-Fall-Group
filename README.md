@@ -11,6 +11,7 @@ This repo is for Team 🍚 to share code during the fall term.
 ## Outstanding Tasks
 
 - ENSF 612 Presentation 2📥
+- ENSF 607 Final Project
 
 ## Deadlines 📅:
 
@@ -38,6 +39,9 @@ This repo is for Team 🍚 to share code during the fall term.
       - 📁 **Redge**
       - 📄 README.md
   - 📁 **ENSF 608**
-  - 📁 **ENSF 612**
   - 📄 .gitignore
   - 📄 README.md
+
+## ENSF 612 Google Colab
+
+[Google Colab](https://drive.google.com/drive/folders/1XXU3ni4G_ep1M68GXOQSu4L0_0Um72pY?usp=sharing)
