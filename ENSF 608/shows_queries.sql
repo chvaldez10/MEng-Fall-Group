@@ -8,7 +8,7 @@ SELECT * FROM Shows;
 SELECT * FROM Shows ORDER BY PerformanceYear DESC;
 
 -- A nested retrieval query
-SELECT * FROM Performers WHERE PerformerID IN (SELECT PerformerID FROM Aerialist WHERE Sport = 'Aerial Silks');
+SELECT * FROM Performers WHERE PerformerID IN (SELECT PerformerID FROM Aerialist WHERE Sport LIKE 'Aerial%');
 
 -- A retrieval query using joined tables
 SELECT Shows.Name, Venues.Name AS VenueName, hostedby.ShowDate
@@ -33,7 +33,7 @@ DELIMITER ;
 
 -- Example update operation
 UPDATE hostedby
-SET ShowDate = '2023-12-01'
+SET ShowDate = '2023-12-02'
 WHERE ShowName = 'Alegria' AND ShowPerformanceYear = 2006 AND VenueID = 1;
 
 -- A deletion operation with any necessary triggers
@@ -48,7 +48,7 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM Shows
-        WHERE Shows.Sponsor = 'SponsorA'
+        WHERE Shows.Sponsor = 'Cirque du Soleil'
     ) THEN
         SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'Cannot delete show sponsored by a specific sponsor';
@@ -59,7 +59,7 @@ DELIMITER ;
 
 -- Example delete operation that should be prevented by the trigger
 DELETE FROM Shows
-WHERE Name = 'Alegria' AND PerformanceYear = 2006 AND Sponsor = 'SponsorA';
+WHERE Name = 'Alegria' AND PerformanceYear = 2006 AND Sponsor = 'Cirque du Soleil';
 
 
 
