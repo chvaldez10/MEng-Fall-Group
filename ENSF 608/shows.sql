@@ -1,3 +1,10 @@
+-- shows.sql
+-- ENSF608 Final Project
+-- Group Members:
+-- Redge Santillan
+-- Chioma Ukaegbu
+-- Christian Valdez
+
 -- Create database
 DROP DATABASE IF EXISTS CIRQUEDUSOLEIL;
 CREATE DATABASE IF NOT EXISTS CIRQUEDUSOLEIL;
