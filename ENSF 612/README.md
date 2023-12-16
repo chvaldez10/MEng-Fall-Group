@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-In our ENSF 612 project, we have developed models to predict the total duration of taxi trips in the bustling heart of New York City (NYC). This dataset was chosen for its rich insights into the intricate traffic patterns of one of the world's most vibrant cities.
+In our ENSF 612 project, we have developed machine learning models to predict the total duration of taxi trips in the bustling heart of New York City (NYC) using **PySpark** (a Python API for Apache Spark). This dataset was chosen for its rich insights into the intricate traffic patterns of one of the world's most vibrant cities.
 
 ---
 
