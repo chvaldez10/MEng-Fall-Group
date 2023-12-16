@@ -1,0 +1,35 @@
+@startuml
+class FileHandler {
++ List<String[]> readCsv(String)
+}
+
+class DataLoader {
++ List<Ride> load(List<String[]>)
+- Ride createRideFromRow(String[])
+}
+
+class Ride {
+# String pickupDatetime
+# String dropoffDatetime
+# int passengerCount
+# double pickupLongitude
+# double pickupLatitude
+# double dropoffLongitude
+# double dropoffLatitude
+# int tripDuration
+<<constructor>>
+<<getters and setters>>
+}
+
+class EnhancedRide {
+# int vendorId
+# boolean storeAndFwdFlag
+<<constructor>>
+<<getters and setters>>
+}
+
+class DataAnalyzer {
++ double averageTripDuration(List<Ride>)
+}
+
+@enduml
